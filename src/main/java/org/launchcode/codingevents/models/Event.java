@@ -1,5 +1,8 @@
 package org.launchcode.codingevents.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -9,10 +12,15 @@ import java.util.Objects;
 /**
  * Created by Chris Bay
  */
+@Entity
 public class Event {
 
+    @Id //indicates this is the primary key
+    @GeneratedValue //tells database to generate the primary code
     private int id;
-    private static int nextId = 1;
+
+    //Do not need this once you indicate the primary key
+//    private static int nextId = 1;
 
     @NotBlank(message = "Name is required")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
@@ -28,16 +36,17 @@ public class Event {
     private EventType type;
 
     public Event(String name, String description, String contactEmail, EventType type) {
-        this();
+//        this(); -- not doing anything anymore since you deleted the nextid
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.type = type;
     }
 
+    //need a no arg constructor with a persistent class / entity class
     public Event() {
-        this.id = nextId;
-        nextId++;
+//        this.id = nextId;
+//        nextId++;
     }
     public String getName() {
         return name;
