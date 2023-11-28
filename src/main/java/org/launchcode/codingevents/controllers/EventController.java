@@ -59,6 +59,7 @@ public class EventController {
             return "events/create";
         }
 
+
         eventRepository.save(newEvent);
         return "redirect:/events";
     }
